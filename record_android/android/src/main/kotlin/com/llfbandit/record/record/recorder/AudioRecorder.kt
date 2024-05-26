@@ -136,6 +136,7 @@ class AudioRecorder(
 
     private fun muteAudio(mute: Boolean) {
         val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
 
         val muteValue = -100    // AudioManager.ADJUST_MUTE
         val unmuteValue = 100   // AudioManager.ADJUST_UNMUTE
@@ -150,6 +151,7 @@ class AudioRecorder(
         muteSettings.clear()
 
         val audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager.mode = AudioManager.MODE_IN_COMMUNICATION
 
         muteStreams.forEach { stream ->
             muteSettings[stream] = audioManager.getStreamVolume(stream)

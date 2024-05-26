@@ -92,7 +92,7 @@ class PCMReader(
 
         val reader = try {
             AudioRecord(
-                MediaRecorder.AudioSource.DEFAULT,
+                MediaRecorder.AudioSource.VOICE_COMMUNICATION,
                 sampleRate,
                 channels,
                 audioFormat,
@@ -162,6 +162,9 @@ class PCMReader(
         if (config.echoCancel && AcousticEchoCanceler.isAvailable()) {
             acousticEchoCanceler = AcousticEchoCanceler.create(reader.audioSessionId)
             acousticEchoCanceler?.enabled = true
+            Log.w(TAG, "Echo suppressor has been enabled")
+        } else {
+            Log.w(TAG, "Echo suppressor is not enabled or supported")
         }
     }
 
